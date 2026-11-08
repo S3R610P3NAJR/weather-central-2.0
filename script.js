@@ -4,6 +4,7 @@ const citySearch = document.getElementById('city-search');
 const searchButton = document.getElementById('search-button');
 const weatherData = document.getElementById('weather-data');
 const weatherData2 = document.getElementById('weather-data-2');
+const image = document.getElementById('animation-img');
 
 
 /* -------- JS Logic ----------- */
@@ -41,92 +42,112 @@ weatherForm.addEventListener('submit', async function(event) {
 
   const weatherCode = weatherJson.current.weather_code;
   let weatherDescription;
+  let animation;
    switch(weatherCode){
       case 0:
          weatherDescription = "Clear Sky";
+         animation = "images/clear-sky.svg" ;
          break;
 
       case 1:
          weatherDescription = "Mainly Clear";
+         animation = "images/mainly-clear.svg";
          break;
 
       case 2:
          weatherDescription = "Partly Cloudy";
+         animation = "images/partly-cloudy.svg";
          break;
 
       case 3:
          weatherDescription = "Overcast";
+         animation = "images/overcast.svg";
          break;
 
       case 45:
          weatherDescription = "Fog";
+         animation = "images/fog.svg";
          break;
 
       case 48:
          weatherDescription = "Depositing Rime Fog";
+         animation = "images/fog.svg";
          break;
 
       case 51:
       case 53:
       case 55:
          weatherDescription = "Drizzle";
+         animation = "images/drizzle.svg";
          break;
 
       case 56:
       case 57:
          weatherDescription = "Freezing Drizzle";
+         animation = "images/drizzle.svg";
          break;
 
       case 61:
       case 63:
       case 65:
          weatherDescription = "Rain";
+         animation = "images/rain.svg";
          break;
 
       case 66:
       case 67:
          weatherDescription = "Freezing Rain";
+         animation = "images/rain.svg";
          break;
 
       case 71:
       case 73:
       case 75:
          weatherDescription = "Snowfall";
+         animation = "images/snow.svg";
          break;
 
       case 77:
          weatherDescription = "Snow Grains";
+         animation = "images/snow-grains.svg";
          break;
 
       case 80:
       case 81:
       case 82:
          weatherDescription = "Rain Showers";
+         animation = "images/rain-showers.svg";
          break;
 
       case 85:
       case 86:
          weatherDescription = "Snow Showers";
+         animation = "images/rain-showers.svg";
          break;
 
       case 95:
          weatherDescription = "Thunderstorm";
+         animation = "images/thunderstorms.svg";
          break;
 
       case 96:
-         eatherDescription = "Thunderstorm + Slight Hail";
+         weatherDescription = "Thunderstorm + Slight Hail";
+         animation = "images/heavy-hail.svg";
          break;
 
       case 97:
          weatherDescription = "Heavy Thunderstorm";
+         animation = "images/heavy-thunderstorms.svg";
          break;
 
       case 99:
          weatherDescription = "Thunderstorm + Heavy Hail";
+         animation = "images/heavy-hail.svg";
          break;
 
       default:
          weatherDescription = "Description Unavailable";
+         animation = "images/unavailable.svg";
          break;
 }
 
@@ -136,6 +157,8 @@ weatherForm.addEventListener('submit', async function(event) {
   // line to display weather description here ?
   weatherData.textContent = `${searchValue.toUpperCase()}: ${currentTemp}°F`;
   weatherData2.textContent = `${weatherDescription}`;
+  image.data = animation;
+
   
 });
    

@@ -33,11 +33,11 @@ main{
 #search-section{
    display: flex;
    justify-content: center;
-   height: 8rem;
+   height: 6rem;
 }
 
 form{
-    padding: 2rem;
+    padding: 1rem;
     display: flex;
     align-items: center;
     
@@ -74,9 +74,9 @@ button{
 #weather-output{
    display: flex;
    flex-direction: column;
-   flex-grow: 1;
+   flex-grow: .1;
    align-items: center;
-   padding: 2rem;
+   padding: .2rem;
 }
 
 
@@ -85,13 +85,18 @@ h2{
 } 
 
 #weather-data{
-   padding: 1rem;
+   padding: .2rem;
    font-size: 2rem;
 }
 
 #weather-data-2{
-   padding: 1rem;
+   padding: .2rem;
    font-size: 2rem;
+}
+
+#animation-img{
+   height: 30rem;
+   
 }
 
 
@@ -99,7 +104,7 @@ footer{
    display: flex;
    flex-direction: column;
    align-items: center;
-   font-size: 2.2rem;
+   font-size: 1.5rem;
    background-color: #4397d0;
 }
 
@@ -191,6 +196,11 @@ label{
      padding: 1rem;
      font-size: .8rem;
    }
+
+   #animation-img{
+   height: 20rem;
+   
+}
 
    footer{
      font-size: .6rem;
