@@ -1,7 +1,7 @@
 /* ------------------- DOM references --------------------------- */
 const weatherForm = document.getElementById('weather-form');
 const citySearch = document.getElementById('city-search');
-const searchButton = document.getElementById('search-button');
+//const searchButton = document.getElementById('search-button');
 const weatherData = document.getElementById('weather-data');
 const weatherData2 = document.getElementById('weather-data-2');
 const image = document.getElementById('animation-img');
@@ -21,14 +21,25 @@ weatherForm.addEventListener('submit', async function(event) {
   /* ---------------  API Fetch ------------------------------------- */
 
   const apiSearchUrl = "https://geocoding-api.open-meteo.com/v1/search" + "?name=" + searchValue;
+  let weatherJson;
+  let jsonResponse;
+  
 
-  const response = await fetch(apiSearchUrl); // waits promise.
-  const jsonResponse = await response.json(); // waits for json conversion to JS and response.
-  console.log(jsonResponse);
-  if (!jsonResponse.results || jsonResponse.results.length === 0) { // check the returned array, for any values.
+  try{
+   const response = await fetch(apiSearchUrl); // waits promise.
+
+   if (!response.ok){
+        weatherData.textContent = "HTTP request was unsuccessful.";
+       return;
+   } else {
+      jsonResponse = await response.json(); //Waits for the response body to be converted from JSON into a JavaScript object.
+   }
+  
+   
+   if (!jsonResponse.results || jsonResponse.results.length === 0) { // check the returned array, for any values.
     weatherData.textContent = 'Sorry, City Not Found.';
     return;
-  }
+  };
 
 
   const locationResult = jsonResponse.results[0]; // grabs first value, on array index 0.
@@ -36,18 +47,30 @@ weatherForm.addEventListener('submit', async function(event) {
   const longitude = locationResult.longitude; // grabs longitude property from locationResult.
 
   const weatherApiUrl = 'https://api.open-meteo.com/v1/forecast' + '?latitude=' + latitude +
-    '&longitude=' + longitude + '&current=temperature_2m,weather_code,is_day' + '&temperature_unit=fahrenheit'; // save base url and data to request from api.
+  '&longitude=' + longitude + '&current=temperature_2m,weather_code,is_day' + '&temperature_unit=fahrenheit'; // save base url and data to request from api.
+  const weatherResponse = await fetch(weatherApiUrl); 
+  
+  if(!weatherResponse.ok){
+    weatherData.textContent = "HTTP request was unsuccessful.";
+    return;
+    } else {
+     weatherJson = await weatherResponse.json(); // Waits for the response body to be converted from JSON into a JavaScript object
+    };
 
-  const weatherResponse = await fetch(weatherApiUrl); // waits for promise.
-  const weatherJson = await weatherResponse.json(); // converts JSON data to usable JS data.
-  console.log(weatherJson);
+
+
+  } catch (error){
+   weatherData.textContent = 'Api Network Connection Error.';
+   return;
+  }
+
 
   /* ------------------- Switch ---------------------------------------*/
 
-  const weatherCode = weatherJson.current.weather_code;
-  const dayNight = weatherJson.current.is_day;
-  let weatherDescription;
-  let animation;
+const weatherCode = weatherJson.current.weather_code;
+const dayNight = weatherJson.current.is_day;
+let weatherDescription;
+let animation;
 switch(weatherCode) {
   case 0:
     weatherDescription = "Clear Sky";
@@ -282,11 +305,3 @@ switch(weatherCode) {
 });
    
 
-
-/*
-         if(dayNight === 1){
-            animation = "";
-         } else {
-            animation = "";
-         }
-             */
