@@ -95,7 +95,7 @@ h2{
 }
 
 #animation-img{
-   height: 30rem;
+   height: 38rem;
    
 }
 
@@ -117,7 +117,7 @@ footer{
 
 /* ---------- Media Queries Tablets -------- */
 
-@media screen and (max-width:1031px) {
+@media screen and (max-width:1700px){
    header{
    font-size: 2rem;
 }
@@ -154,10 +154,20 @@ label{
 
 /* --------- Media Queries Mobile ----- */
 
-@media screen and (max-width: 640px) {
+
+
+/* was 640px bellow */
+
+
+@media screen and (max-width: 790px){
    header{
       font-size: .9rem;
    }
+
+   main{
+   flex-grow: 2rem;
+   
+}
 
    label{
      font-size: 1rem;
@@ -169,7 +179,9 @@ label{
      border: 1px inset black;
      height: 2rem;
      border-radius: 10px;
-     width: 7rem;
+     font-size: 1rem;
+     font-weight: 700;
+     width: 8rem;
      margin: .3rem;
    }
 
@@ -181,6 +193,7 @@ label{
      width: 5rem;
      font-weight: 700;
      font-size: 1rem;
+     color: black;
    }
 
    h2{
@@ -198,7 +211,7 @@ label{
    }
 
    #animation-img{
-   height: 20rem;
+   height: 18rem;
    
 }
 
