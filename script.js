@@ -1,4 +1,4 @@
-/* ------ DOM references ----------- */
+/* ------------------- DOM references --------------------------- */
 const weatherForm = document.getElementById('weather-form');
 const citySearch = document.getElementById('city-search');
 const searchButton = document.getElementById('search-button');
@@ -7,7 +7,7 @@ const weatherData2 = document.getElementById('weather-data-2');
 const image = document.getElementById('animation-img');
 
 
-/* -------- JS Logic ----------- */
+/* -------------------- JS Logic ---------------------------------- */
 
 weatherForm.addEventListener('submit', async function(event) {
   event.preventDefault(); // prevents browser default behavior.
@@ -18,13 +18,16 @@ weatherForm.addEventListener('submit', async function(event) {
     return; // exit if input not valid.
   }
 
+  /* ---------------  API Fetch ------------------------------------- */
 
   const apiSearchUrl = "https://geocoding-api.open-meteo.com/v1/search" + "?name=" + searchValue;
+
   const response = await fetch(apiSearchUrl); // waits promise.
   const jsonResponse = await response.json(); // waits for json conversion to JS and response.
-
-  if (jsonResponse.results.length === 0) { // check the returned array, for any values.
-    return; // exits if no values found in response array.
+  console.log(jsonResponse);
+  if (!jsonResponse.results || jsonResponse.results.length === 0) { // check the returned array, for any values.
+    weatherData.textContent = 'Sorry, City Not Found.';
+    return;
   }
 
 
@@ -33,128 +36,244 @@ weatherForm.addEventListener('submit', async function(event) {
   const longitude = locationResult.longitude; // grabs longitude property from locationResult.
 
   const weatherApiUrl = 'https://api.open-meteo.com/v1/forecast' + '?latitude=' + latitude +
-    '&longitude=' + longitude + '&current=temperature_2m,weather_code' + '&temperature_unit=fahrenheit'; // save base url and data to request from api.
+    '&longitude=' + longitude + '&current=temperature_2m,weather_code,is_day' + '&temperature_unit=fahrenheit'; // save base url and data to request from api.
 
   const weatherResponse = await fetch(weatherApiUrl); // waits for promise.
   const weatherJson = await weatherResponse.json(); // converts JSON data to usable JS data.
   console.log(weatherJson);
 
+  /* ------------------- Switch ---------------------------------------*/
 
   const weatherCode = weatherJson.current.weather_code;
+  const dayNight = weatherJson.current.is_day;
   let weatherDescription;
   let animation;
-   switch(weatherCode){
-      case 0:
-         weatherDescription = "Clear Sky";
-         animation = "images/clear-sky.svg" ;
-         break;
+switch(weatherCode) {
+  case 0:
+    weatherDescription = "Clear Sky";
 
-      case 1:
-         weatherDescription = "Mainly Clear";
-         animation = "images/mainly-clear.svg";
-         break;
+    if (dayNight === 1) {
+      animation = "images/clear-sky.svg";
+    } else {
+      animation = "images/clear-night.svg";
+    }
 
-      case 2:
-         weatherDescription = "Partly Cloudy";
-         animation = "images/partly-cloudy.svg";
-         break;
+    break;
 
-      case 3:
-         weatherDescription = "Overcast";
-         animation = "images/overcast.svg";
-         break;
+  case 1:
+    weatherDescription = "Mainly Clear";
 
-      case 45:
-         weatherDescription = "Fog";
-         animation = "images/fog.svg";
-         break;
+    if (dayNight === 1) {
+      animation = "images/mainly-clear.svg";
+    } else {
+      animation = "images/clear-night.svg";
+    }
 
-      case 48:
-         weatherDescription = "Depositing Rime Fog";
-         animation = "images/fog.svg";
-         break;
+    break;
 
-      case 51:
-      case 53:
-      case 55:
-         weatherDescription = "Drizzle";
-         animation = "images/drizzle.svg";
-         break;
+  case 2:
+    weatherDescription = "Partly Cloudy";
 
-      case 56:
-      case 57:
-         weatherDescription = "Freezing Drizzle";
-         animation = "images/drizzle.svg";
-         break;
+    if (dayNight === 1) {
+      animation = "images/partly-cloudy.svg";
+    } else {
+      animation = "images/partly-cloudy-night.svg";
+    }
 
-      case 61:
-      case 63:
-      case 65:
-         weatherDescription = "Rain";
-         animation = "images/rain.svg";
-         break;
+    break;
 
-      case 66:
-      case 67:
-         weatherDescription = "Freezing Rain";
-         animation = "images/rain.svg";
-         break;
+  case 3:
+    weatherDescription = "Overcast";
 
-      case 71:
-      case 73:
-      case 75:
-         weatherDescription = "Snowfall";
-         animation = "images/snow.svg";
-         break;
+    if (dayNight === 1) {
+      animation = "images/overcast.svg";
+    } else {
+      animation = "images/overcast-night.svg";
+    }
 
-      case 77:
-         weatherDescription = "Snow Grains";
-         animation = "images/snow-grains.svg";
-         break;
+    break;
 
-      case 80:
-      case 81:
-      case 82:
-         weatherDescription = "Rain Showers";
-         animation = "images/rain-showers.svg";
-         break;
+  case 45:
+    weatherDescription = "Fog";
 
-      case 85:
-      case 86:
-         weatherDescription = "Snow Showers";
-         animation = "images/rain-showers.svg";
-         break;
+    if (dayNight === 1) {
+      animation = "images/fog.svg";
+    } else {
+      animation = "images/fog-night.svg";
+    }
 
-      case 95:
-         weatherDescription = "Thunderstorm";
-         animation = "images/thunderstorms.svg";
-         break;
+    break;
 
-      case 96:
-         weatherDescription = "Thunderstorm + Slight Hail";
-         animation = "images/heavy-hail.svg";
-         break;
+  case 48:
+    weatherDescription = "Depositing Rime Fog";
 
-      case 97:
-         weatherDescription = "Heavy Thunderstorm";
-         animation = "images/heavy-thunderstorms.svg";
-         break;
+    if (dayNight === 1) {
+      animation = "images/fog.svg";
+    } else {
+      animation = "images/fog-night.svg";
+    }
 
-      case 99:
-         weatherDescription = "Thunderstorm + Heavy Hail";
-         animation = "images/heavy-hail.svg";
-         break;
+    break;
 
-      default:
-         weatherDescription = "Description Unavailable";
-         animation = "images/unavailable.svg";
-         break;
+  case 51:
+  case 53:
+  case 55:
+    weatherDescription = "Drizzle";
+
+    if (dayNight === 1) {
+      animation = "images/drizzle.svg";
+    } else {
+      animation = "images/drizzel-night.svg";
+    }
+
+    break;
+
+  case 56:
+  case 57:
+    weatherDescription = "Freezing Drizzle";
+
+    if (dayNight === 1) {
+      animation = "images/drizzle.svg";
+    } else {
+      animation = "images/freezing-drizzle-night.svg";
+    }
+
+    break;
+
+  case 61:
+  case 63:
+  case 65:
+    weatherDescription = "Rain";
+
+    if (dayNight === 1) {
+      animation = "images/rain.svg";
+    } else {
+      animation = "images/rain-showers-night.svg";
+    }
+
+    break;
+
+  case 66:
+  case 67:
+    weatherDescription = "Freezing Rain";
+
+    if (dayNight === 1) {
+      animation = "images/rain.svg";
+    } else {
+      animation = "images/freezing-drizzle-night.svg";
+    }
+
+    break;
+
+  case 71:
+  case 73:
+  case 75:
+    weatherDescription = "Snowfall";
+
+    if (dayNight === 1) {
+      animation = "images/snow.svg";
+    } else {
+      animation = "images/snow-fall-night.svg";
+    }
+
+    break;
+
+  case 77:
+    weatherDescription = "Snow Grains";
+
+    if (dayNight === 1) {
+      animation = "images/snow-grains.svg";
+    } else {
+      animation = "images/snow-fall-night.svg";
+    }
+
+    break;
+
+  case 80:
+  case 81:
+  case 82:
+    weatherDescription = "Rain Showers";
+
+    if (dayNight === 1) {
+      animation = "images/rain-showers.svg";
+    } else {
+      animation = "images/rain-showers-night.svg";
+    }
+
+    break;
+
+  case 85:
+  case 86:
+    weatherDescription = "Snow Showers";
+
+    if (dayNight === 1) {
+      animation = "images/snow-grains.svg";
+    } else {
+      animation = "images/snow-showers-night.svg";
+    }
+
+    break;
+
+  case 95:
+    weatherDescription = "Thunderstorm";
+
+    if (dayNight === 1) {
+      animation = "images/thunderstorms.svg";
+    } else {
+      animation = "images/thunderstorm-night.svg";
+    }
+
+    break;
+
+  case 96:
+    weatherDescription = "Thunderstorm + Slight Hail";
+
+    if (dayNight === 1) {
+      animation = "images/thunderstorms.svg";
+    } else {
+      animation = "images/thunderstorms-hail-night-snow.svg";
+    }
+
+    break;
+
+  case 97:
+    weatherDescription = "Heavy Thunderstorm";
+
+    if (dayNight === 1) {
+      animation = "images/heavy-thunderstorms.svg";
+    } else {
+      animation = "images/thunderstorm-night.svg";
+    }
+
+    break;
+
+  case 99:
+    weatherDescription = "Thunderstorm + Heavy Hail";
+
+    if (dayNight === 1) {
+      animation = "images/heavy-hail.svg";
+    } else {
+      animation = "images/thunderstorms-hail-night-snow.svg";
+    }
+
+    break;
+
+  default:
+    weatherDescription = "Description Unavailable";
+
+    if (dayNight === 1) {
+      animation = "images/unavailable.svg";
+    } else {
+      animation = "images/unavailable.svg";
+    }
+
+    break;
 }
 
   const currentTemp = weatherJson.current.temperature_2m;
 
 
-  // line to display weather description here ?
+  /* ------------------ DOM Manipulation ----------------------------------- */
   weatherData.textContent = `${searchValue.toUpperCase()}: ${currentTemp}°F`;
   weatherData2.textContent = `${weatherDescription}`;
   image.data = animation;
@@ -162,3 +281,12 @@ weatherForm.addEventListener('submit', async function(event) {
   
 });
    
+
+
+/*
+         if(dayNight === 1){
+            animation = "";
+         } else {
+            animation = "";
+         }
+             */
