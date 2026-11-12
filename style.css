@@ -164,6 +164,11 @@ label{
       font-size: .9rem;
    }
 
+   main{
+   flex-grow: .38;
+   
+}
+
    label{
      font-size: 1rem;
      align-self: center;
