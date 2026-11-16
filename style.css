@@ -2,8 +2,8 @@
    box-sizing: border-box;
 }
 
-body{
-   min-height:100dvh;
+body {
+   min-height: 100dvh;
    font-family: Arial;
    margin: 0;
    padding: 0;
@@ -12,66 +12,79 @@ body{
    letter-spacing: .1rem;
 }
 
-header{
+/* ---------- Header ---------- */
+
+header {
    display: flex;
    justify-content: center;
+   align-items: center;
+   height: 7rem;
    font-size: 3rem;
-   background-color:#4f89b6;
+   background-color: #4f89b6;
 }
 
-#title{
-   text-shadow: 3px 10px 7px rgb(20, 183, 219);
+#title {
+   text-shadow: 12px 10px 6px rgb(20, 183, 219);
 }
 
-main{
+/* ---------- Main ---------- */
+
+main {
    display: flex;
    flex-direction: column;
    flex-grow: 1;
    background-color: #77939f;
 }
 
-#search-section{
+/* ---------- Search ---------- */
+
+#search-section {
    display: flex;
    justify-content: center;
    height: 6rem;
 }
 
-form{
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    
+form {
+   width: 80rem;
+   height: 5.5rem;
+   padding: 1rem;
+   margin: auto;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
 
-label{
+label {
+   width: 13rem;
    font-weight: 700;
-   font-size: 2.5rem;
+   font-size: 2.2rem;
 }
 
-input{
+input {
    box-shadow: 8px 7px 5px black;
    border: 6px inset black;
-   height: 3rem;
-   background-color:#76b5eb;
+   width: 23rem;
+   background-color: #76b5eb;
    border-radius: 10px;
-   width: 18rem;
-   margin: 1rem;
+   margin: 1.3rem;
    font-size: 1.9rem;
-   padding:.5rem;
+   padding: .5rem;
 }
 
-button{
+button {
    border: 6px inset black;
    box-shadow: 8px 7px 5px black;
    border-radius: 10px;
-   height: 3rem;
-   width: 10rem;
+   height: 4rem;
+   width: 11rem;
    font-weight: 700;
    font-size: 2rem;
-   background-color:#6a9bc1;
+   background-color: #6a9bc1;
 }
 
-#weather-output{
+/* ---------- Weather Output ---------- */
+
+#weather-output {
    display: flex;
    flex-direction: column;
    flex-grow: .1;
@@ -79,149 +92,167 @@ button{
    padding: .2rem;
 }
 
+h2 {
+   font-size: 2.7rem;
+}
 
-h2{
-   font-size: 3rem;
-} 
-
-#weather-data{
+#weather-data,
+#weather-data-2 {
    padding: .2rem;
    font-size: 2rem;
 }
 
-#weather-data-2{
-   padding: .2rem;
-   font-size: 2rem;
+#animation-img {
+   height: 36rem;
 }
 
-#animation-img{
-   height: 38rem;
-   
-}
+/* ---------- Footer ---------- */
 
-
-footer{
+footer {
    display: flex;
    flex-direction: column;
+   height: 3rem;
    align-items: center;
+   justify-content: center;
    font-size: 1.5rem;
    background-color: #4397d0;
 }
 
-#my-name{
+#my-name {
    text-shadow: 3px 5px 3px rgb(20, 183, 219);
    font-weight: 700;
    font-style: italic;
-   font-size: 2.5rem;
+   font-size: 1.8rem;
 }
 
-/* ---------- Media Queries Tablets -------- */
+/* ---------- Tablet ---------- */
 
-@media screen and (max-width:1700px){
-   header{
-   font-size: 2rem;
+@media screen and (max-width: 1000px) {
+
+   header {
+      font-size: 1.8rem;
+   }
+
+   label {
+      font-size: 1.6rem;
+      width: 11rem;
+   }
+
+   input {
+      box-shadow: 3px 5px 5px black;
+      border: 1px inset black;
+      height: 3rem;
+      width: 16rem;
+   }
+
+   button {
+      border: 1px inset black;
+      box-shadow: 3px 5px 5px black;
+      height: 3rem;
+      width: 8rem;
+      font-size: 1.6rem;
+   }
+
+   h2 {
+      font-size: 1.6rem;
+   }
+
+   #animation-img {
+      height: 25rem;
+   }
+
+   footer {
+      font-size: 1.3rem;
+      text-shadow: 1px 1px 1px black;
+   }
+
+   #my-name {
+      text-shadow: 1px 1px 2px rgb(39, 221, 215);
+      font-size: 1.5rem;
+   }
 }
 
-label{
-     font-size: 1.7rem;
+/* ---------- Mobile ---------- */
+
+@media screen and (max-width: 726px) {
+
+   header {
+      font-size: 1.5rem;
    }
 
-   input{
-     box-shadow: 3px 5px 5px black;
-     border: 1px inset black;
-     height: 3rem;
-     width: 12rem;
+   label {
+      width: 10rem;
+      font-size: 1.3rem;
+      text-align: end;
    }
 
-   button{
-     border: 1px inset black;
-     box-shadow: 3px 5px 5px black;
-     border-radius: 10px;
-     height: 2.7rem;
-     width: 7rem;
-     font-weight: 700;
-     font-size: 1.6rem;
-   }
-    footer{
-     font-size: 1.3rem;
-     text-shadow: 1px 1px 1px black;
-  }
-   #my-name{
-     text-shadow: 1px 1px 2px rgb(39, 221, 215);
-     font-size: 1.5rem;
-  }
-}
-
-/* --------- Media Queries Mobile ----- */
-
-
-
-/* was 640px bellow */
-
-
-@media screen and (max-width: 790px){
-   header{
-      font-size: .9rem;
+   input {
+      box-shadow: 1px 5px 5px black;
+      height: 2rem;
+      width: 12rem;
+      font-size: 1rem;
+      margin: .5rem;
    }
 
-   main{
-   flex-grow: 2rem;
-   
-}
-
-   label{
-     font-size: 1rem;
-     align-self: center;
+   button {
+      box-shadow: 1px 4px 5px black;
+      height: 2rem;
+      width: 6rem;
+      font-size: 1rem;
+      color: black;
    }
 
-   input{
-     box-shadow: 1px 5px 5px black;
-     border: 1px inset black;
-     height: 2rem;
-     border-radius: 10px;
-     font-size: 1rem;
-     font-weight: 700;
-     width: 8rem;
-     margin: .3rem;
-   }
-
-   button{
-     border: 1px inset black;
-     box-shadow: 1px 4px 5px black;
-     border-radius: 10px;
-     height: 2rem;
-     width: 5rem;
-     font-weight: 700;
-     font-size: 1rem;
-     color: black;
-   }
-
-   h2{
+   h2 {
       font-size: 1.3rem;
    }
 
-   #weather-data{
-     padding: 1rem;
-     font-size: .8rem;
+   #weather-data,
+   #weather-data-2 {
+      padding: 1rem;
+      font-size: .8rem;
    }
 
-   #weather-data-2{
-     padding: 1rem;
-     font-size: .8rem;
+   #animation-img {
+      height: 18rem;
    }
 
-   #animation-img{
-   height: 18rem;
-   
+   footer {
+      font-size: .8rem;
+   }
+
+   #my-name {
+      font-size: 1.1rem;
+   }
 }
 
-   footer{
-     font-size: .6rem;
-  }
+/* ---------- Small Mobile ---------- */
 
-   #my-name{
-     font-size: .8rem;
-  }
+@media screen and (max-width: 490px) {
+
+   header {
+      font-size: 1rem;
+   }
+
+   label {
+      width: 7rem;
+      font-size: .8rem;
+   }
+
+   input {
+      width: 6rem;
+      font-size: .8rem;
+   }
+
+   button {
+      width: 4rem;
+      font-size: .8rem;
+   }
+
+   footer {
+      font-size: .5rem;
+   }
+
+   #my-name {
+      font-size: .8rem;
+   }
 }
-
-
