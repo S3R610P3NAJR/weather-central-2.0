@@ -4,7 +4,6 @@
 
 body {
    min-height: 100dvh;
-   height: 100dvh;
    font-family: Arial;
    margin: 0;
    padding: 0;
@@ -176,6 +175,10 @@ footer {
 /* ---------- Mobile ---------- */
 
 @media screen and (max-width: 726px) {
+
+   body{
+      height: 110dvh;
+   }
 
    header {
       font-size: 1.5rem;
