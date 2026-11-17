@@ -87,7 +87,7 @@ button {
 #weather-output {
    display: flex;
    flex-direction: column;
-   flex-grow: .1;
+   flex-grow: 1;
    align-items: center;
    padding: .2rem;
 }
@@ -179,6 +179,11 @@ footer {
    header {
       font-size: 1.5rem;
    }
+   form {
+      overflow: hidden;
+      justify-content: left;
+      gap:1rem;
+   }
 
    label {
       width: 10rem;
@@ -189,7 +194,7 @@ footer {
    input {
       box-shadow: 1px 5px 5px black;
       height: 2rem;
-      width: 12rem;
+      width: 16rem;
       font-size: 1rem;
       margin: .5rem;
    }
@@ -197,23 +202,30 @@ footer {
    button {
       box-shadow: 1px 4px 5px black;
       height: 2rem;
-      width: 6rem;
+      width: 8rem;
       font-size: 1rem;
       color: black;
    }
 
    h2 {
-      font-size: 1.3rem;
+      font-size: 1.5rem;
+   }
+
+   #weather-output{
+      overflow: hidden;
    }
 
    #weather-data,
    #weather-data-2 {
       padding: 1rem;
-      font-size: .8rem;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: .1rem;
    }
 
    #animation-img {
-      height: 18rem;
+      
+      height: 13rem;
    }
 
    footer {
@@ -227,25 +239,45 @@ footer {
 
 /* ---------- Small Mobile ---------- */
 
-@media screen and (max-width: 490px) {
+@media screen and (max-width: 607px) {
 
+  
    header {
       font-size: 1rem;
    }
+     form {
+      overflow: hidden;
+      justify-content: left;
+      gap:.5rem;
+   }
 
    label {
-      width: 7rem;
+      width: 8rem;
       font-size: .8rem;
    }
 
    input {
-      width: 6rem;
+      width:12rem;
       font-size: .8rem;
    }
 
    button {
-      width: 4rem;
+      width: 6rem;
       font-size: .8rem;
+   }
+
+   h2 {
+      font-size: 1rem;
+   }
+
+   #weather-data,
+   #weather-data-2 {
+      font-size: .6rem;
+      letter-spacing: .15rem;
+   }
+
+   #animation-img {
+      height: 10rem;
    }
 
    footer {
